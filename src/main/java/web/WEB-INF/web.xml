@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <context-param>
+        <description>Location to store uploaded file</description>
+        <param-name>file-upload</param-name>
+        <param-value>
+            E:\Synchronization\javaprogram\MyIDEAProgram\MywebApp\File\
+        </param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>studio.geek.servelet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>studio.geek.servelet.IndexServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/IndexServlet</url-pattern>
+    </servlet-mapping>
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>studio.geek.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/index.html</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>CharacterFilter</filter-name>
+        <filter-class>studio.geek.filter.CharacterFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <servlet>
+        <servlet-name>VerifyServlet</servlet-name>
+        <servlet-class>studio.geek.servelet.VerifyServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>VerifyServlet</servlet-name>
+        <url-pattern>/VerifyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>studio.geek.servelet.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CodeServelt</servlet-name>
+        <servlet-class>studio.geek.servelet.CodeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CodeServelt</servlet-name>
+        <url-pattern>/CodeServelt</url-pattern>
+    </servlet-mapping>
+    <!--<filter>-->
+    <!--<filter-name>AsyncFilter</filter-name>-->
+    <!--<filter-class>com.po.AsyncFilter</filter-class>-->
+
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>AsyncFilter</filter-name>-->
+    <!--<url-pattern>*.html</url-pattern>-->
+    <!--</filter-mapping>-->
+    <!--<filter>-->
+    <!--<filter-name>FilterDemo</filter-name>-->
+    <!--<filter-class>FilterDemo</filter-class>-->
+
+    <!--</filter>-->
+    <!--<filter>-->
+    <!--<filter-name>ErrorFilter</filter-name>-->
+    <!--<filter-class>ErrorFilter</filter-class>-->
+
+    <!--</filter>-->
+
+    <!--<filter>-->
+    <!--<filter-name>FilterDemo2</filter-name>-->
+    <!--<filter-class>FilterDemo2</filter-class>-->
+
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>FilterDemo</filter-name>-->
+    <!--<url-pattern>*.html</url-pattern>-->
+    <!--</filter-mapping>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>ErrorFilter</filter-name>-->
+    <!--<url-pattern>/error.jsp</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <!--<filter-mapping>-->
+    <!--<filter-name>FilterDemo2</filter-name>-->
+    <!--<url-pattern>*.html</url-pattern>-->
+    <!--</filter-mapping>-->
+
+
+    <!--<error-page>-->
+    <!--<error-code>404</error-code>-->
+    <!--<location>/error.jsp</location>-->
+    <!--</error-page>-->
+</web-app>

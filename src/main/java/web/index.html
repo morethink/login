@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #book {
+            width: 200px;
+            height: 200px;
+            background: pink;
+        }
+    </style>
+    <link href="cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+        //        $(document).ready(function () {
+        //            info();
+        //        })
+
+        $(document).ready(function(){
+        });
+        function info() {
+            $.ajax({
+                type: "get",//请求方式
+                url: "https://api.shanbay.com/bdc/search/",//发送请求地址
+                data : {
+                  "word" : "me"
+                },
+                timeout: 30000,//超时时间：30秒
+                dataType: "json",//设置返回数据的格式
+                //请求成功后的回调函数 data为json格式
+                success: function (data) {
+                    console.log(data);
+//                    $("#book").text(data.book[0].bookName);
+
+//                    for(var p in data.book){        //遍历json数组时，这么写p为索引，0,1
+//                        $("#book").text(p.bookName + p.outtime + p.intime);
+//                    }
+                    //document.getElementById("book").innerHTML = data.username + data.book[0].bookName;
+
+                    for (var i = 0, l = data.book.length; i < l; i++) {
+//                        var str = "";
+                        for (var key in data.book[i]) {
+                            document.write(data.book[i][key]);
+//                            str +=data.book[i][key];
+                        }
+                        //  $("#book").text(str);
+//                        str = "";
+                    }
+                }
+                ,
+                error: function () {
+                    $("#result").text("请求出错");
+                }
+            });
+        }
+        function changePassword() {
+            $.ajax({
+                type: "post",//请求方式
+                url: "InfoServlet",//发送请求地址
+                timeout: 30000,//超时时间：30秒
+                dataType: "json",//设置返回数据的格式
+                //请求成功后的回调函数 data为json格式
+                success: function (data) {
+                    $("#book").text(data.username);
+                },
+                error: function () {
+                    $("#resultJsonText").text("请求出错");
+                }
+            });
+        }
+    </script>
+</head>
+<body onload="info()">
+username :
+<span id="username"></span>
+已借书籍 :
+<div id="book">
+
+</div>
+
+
+<p>
+    <input type="button" id="info" value="change password" onclick="changePassword()"/>
+</p>
+
+<p id="result"></p>
+<div id="myTable">
+
+
+</div>
+
+</body>
+</html>

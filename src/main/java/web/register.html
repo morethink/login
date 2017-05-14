@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+        function postUsername() {
+            var usernameObj = $("#username").val();
+            $.ajax({
+                type: "post",//请求方式
+                url: "VerifyServlet?username=" + encodeURI(encodeURI(usernameObj)),//发送请求地址
+                timeout: 30000,//超时时间：30秒
+                dataType: "json",//设置返回数据的格式
+                //请求成功后的回调函数 data为json格式
+                success: function (data) {
+                    if (data.success) {
+                        if (data.success == "true") {
+                            $("#usernameExist").text("用户名存在");
+
+                        } else {
+                            $("#usernameExist").text("用户名bu存在");
+                        }
+
+                    } else {
+                        $.messager.alert('警告', data.msg);
+                    }
+                },
+                // //请求出错的处理
+                error: function () {
+                    $("#resultJsonText").text("请求出错");
+                }
+            });
+
+        }
+        function verifyPassword() {
+            if ($("#password").val() != $("#repassword").val()) {
+                $("#passwordWrong").text("wro");
+            } else {
+                $("#passwordWrong").text("");
+            }
+        }
+        function jsonAjaxPost() {
+            var usernameObj = $("#username").val();
+            var passwordObj = $("#password").val();
+
+            $.ajax({
+                type: "post",//请求方式
+                url: "RegisterServlet?username=" + encodeURI(encodeURI(usernameObj))
+                + "&password=" + encodeURI(encodeURI(passwordObj)),//发送请求地址
+                timeout: 30000,//超时时间：30秒
+                dataType: "json",//设置返回数据的格式
+                //请求成功后的回调函数 data为json格式
+                success: function (data) {
+                    if (data.success) {
+                        if (data.success == "true") {
+                            $("#resultJsonText").text("注册成功");
+                        } else {
+                            $("#resultJsonText").text("注册失败");
+                        }
+
+                    } else {
+                        $.messager.alert('警告', data.msg);
+                    }
+                },
+                //            //请求出错的处理
+                error: function () {
+                    $("#resultJsonText").text("请求出错");
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<form id="form1" method="post">
+
+    username : <input type="text" name="username" id="username" onblur="postUsername()"/>
+    <div class="comment">
+        返回数据：
+        <p id="usernameExist"></p>
+    </div>
+
+    password : <input type="password" name="password" id="password"> <br><br> <br>
+    password : <input type="password" name="repassword" id="repassword" onblur="verifyPassword()">
+    <div class="comment">
+        返回数据：
+        <p id="passwordWrong"></p>
+    </div>
+    <p>
+        <input type="button" id="send" value="register" onclick="jsonAjaxPost()"/>
+    </p>
+</form>
+<div class="comment">
+    返回数据：
+    <p id="resultJsonText"></p>
+</div>
+<div id="resText">
+</div>
+
+<a href="login.html">login</a>
+</body>
+</html>
