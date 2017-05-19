@@ -4,6 +4,23 @@
 <title>log in</title>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            type: "post",//请求方式
+            url: "CodeServlet",  //发送请求地址
+            timeout: 30000,//超时时间：30秒
+            success: function (data) {
+                if (data.result && data.result == "success") {
+                    window.location.href = "index.html";
+                } else {
+                    $("#result").text("用户名或者密码错误");
+                }
+            },
+            error: function () { //请求出错的处理
+                $("#result").text("请求出错");
+            }
+        });
+    })
     function login() {
         if ($("#isUseCookie").is(":checked")) {
             document.getElementById("isUseCookie").value = "true";
@@ -30,6 +47,12 @@
             }
         });
     }
+    function autoFillForm() {
+        var username = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        var password = document.cookie.replace(/(?:(?:^|.*;\s*)password\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        document.getElementById("username").value = username;
+        document.getElementById("password").value = password;
+    }
 </script>
 </head>
 <body onload="autoFillForm()">
@@ -38,12 +61,13 @@
     username : <input type="text" name="username" id="username"/><br>
     password : <input type="password" name="password" id="password">
     <p>
-        <input type="checkbox" id="atuoLogin" checked="checked" value="false"/>自动登录<br>
+        <input type="checkbox" id="isUseCookie" checked="checked" value="false"/>十天内记住我的登录状态<br>
 
-        <input type="button" id="submit" onclick="login()" value="login">
+        <input type="button" id="submit" onclick="loginDemo()" value="login">
         <!--<input type="button" id="submit" value="登录"/>-->
     </p>
 </form>
+<img src="" alt="CodeServlet"/>
 
 <div class="comment">
     返回数据：

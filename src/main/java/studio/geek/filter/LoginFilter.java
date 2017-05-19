@@ -17,7 +17,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         if (request.getSession().getAttribute("username") == null) {
-            response.sendRedirect("no-login.html");
+            response.sendRedirect("no-loginDemo.html");
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }
