@@ -11,17 +11,13 @@ import java.io.IOException;
 public class CharacterFilter implements Filter {
 
     public void init(FilterConfig filterConfig) throws ServletException {
-
     }
 
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-
         request.setCharacterEncoding("UTF-8");
-
         filterChain.doFilter(servletRequest, servletResponse);
-        System.out.println("---------filetr---------");
         response.setCharacterEncoding("UTF-8");
     }
 

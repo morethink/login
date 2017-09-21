@@ -12,14 +12,14 @@
     </style>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-        });
+        //        $(document).ready(function(){
+        //        });
         function info() {
             $.ajax({
                 type: "get",//请求方式
-                url: "https://api.shanbay.com/bdc/search/",//发送请求地址
-                data : {
-                  "word" : "me"
+                url: "/IndexServlet",//发送请求地址
+                data: {
+
                 },
                 timeout: 30000,//超时时间：30秒
                 dataType: "json",//设置返回数据的格式
@@ -33,15 +33,15 @@
 //                    }
                     //document.getElementById("book").innerHTML = data.username + data.book[0].bookName;
 
-                    for (var i = 0, l = data.book.length; i < l; i++) {
-//                        var str = "";
-                        for (var key in data.book[i]) {
-                            document.write(data.book[i][key]);
-//                            str +=data.book[i][key];
-                        }
-                        //  $("#book").text(str);
-//                        str = "";
-                    }
+//                    for (var i = 0, l = data.book.length; i < l; i++) {
+////                        var str = "";
+//                        for (var key in data.book[i]) {
+//                            document.write(data.book[i][key]);
+////                            str +=data.book[i][key];
+//                        }
+//                        //  $("#book").text(str);
+////                        str = "";
+//                    }
                 }
                 ,
                 error: function () {
@@ -49,21 +49,21 @@
                 }
             });
         }
-        function changePassword() {
-            $.ajax({
-                type: "post",//请求方式
-                url: "InfoServlet",//发送请求地址
-                timeout: 30000,//超时时间：30秒
-                dataType: "json",//设置返回数据的格式
-                //请求成功后的回调函数 data为json格式
-                success: function (data) {
-                    $("#book").text(data.username);
-                },
-                error: function () {
-                    $("#resultJsonText").text("请求出错");
-                }
-            });
-        }
+        //        function changePassword() {
+        //            $.ajax({
+        //                type: "post",//请求方式
+        //                url: "InfoServlet",//发送请求地址
+        //                timeout: 30000,//超时时间：30秒
+        //                dataType: "json",//设置返回数据的格式
+        //                //请求成功后的回调函数 data为json格式
+        //                success: function (data) {
+        //                    $("#book").text(data.username);
+        //                },
+        //                error: function () {
+        //                    $("#resultJsonText").text("请求出错");
+        //                }
+        //            });
+        //        }
     </script>
 </head>
 <body onload="info()">
